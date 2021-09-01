@@ -30,7 +30,7 @@ This is my first Virtual Machine in VirtualBox under specific instructions. At t
 	* Storage in physical hard disk: dynamically allocated
 	* Network attached to bridged adapter (to be able to use ssh into de VM)
 	<br  />
-	Configs while installing debian on first starup of VM:
+	Configs while installing debian on first startup of VM:
 	* Language/Country/Keymap/timezone
 	* Hostname: <username>42
 	* Root password
@@ -38,7 +38,7 @@ This is my first Virtual Machine in VirtualBox under specific instructions. At t
 	* Manual Disk partition (in order to create the encrypted partitions using LVM - Logical Volume Manager like following image)
 	<img src="src/encrypted_partitions.png" width=500><br  /><br  />
 
-4. SUDO
+4. SUDO<br  /><br  />
 	Sudo (Super-user do) is a program designed to let system administrators allow some users to execute some commands as root (or another user). The basic philosophy is to give as few privileges as possible but still allow people to get their work done. Sudo is also an effective way to log who ran which command and when.
 	* Installation
 		```bash
@@ -51,9 +51,9 @@ This is my first Virtual Machine in VirtualBox under specific instructions. At t
 		- The TTY mode has to be enabled for security reasons.
 		- For security reasons too, the paths that can be used by sudo must be restricted.
 
-		In order to achieve these configurations, we should edit sudo configuration file. We can easily access it with `sudo visudo`. Access [sudoers manual](https://www.sudo.ws/man/1.8.14/sudoers.man.html) to understand all possible configurations in sudo.
+		In order to achieve these configurations, we should edit sudo configuration file. We can easily access it with `sudo visudo`. Access [sudoers manual](https://www.sudo.ws/man/1.8.14/sudoers.man.html) to understand all possible configurations in sudo.<br  /><br  />
 		<img src="src/sudo_visudo.png" width=600><br  /><br  />
-5. [UFW](https://help.ubuntu.com/community/UFW%0A) firewall<br  />
+5. [UFW](https://help.ubuntu.com/community/UFW%0A) firewall<br  /><br  />
 	UFW is a program for managing a netfilter firewall. Developed to ease iptables firewall configuration, ufw provides a user friendly way to create an IPv4 or IPv6 host-based firewall. By default UFW is disabled.<br  />
 	UFW will be used to configure our OS and leave only port 4242 open. UFM must be active when the virtual machine is launched.
 	* Installation
@@ -73,7 +73,7 @@ This is my first Virtual Machine in VirtualBox under specific instructions. At t
 		sudo ufw allow 4242
 		```
 		<img src="src/ufw.png" width=500><br  /><br  />
-6. Users and groups manipulation
+6. Users and groups manipulation<br  /><br  />
 	It is required that the additional user is assigned to sudo and user42 groups. Also, in the middle of the defense of the project we will be asked to create a new user and assign it to a group.
 	* Create new user
 	```bash
