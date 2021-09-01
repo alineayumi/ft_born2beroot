@@ -21,7 +21,7 @@ This is my first Virtual Machine in VirtualBox under specific instructions. At t
 2. [Download](https://www.debian.org/distrib/netinst) **Debian ISO**. The one I used was amd64 image ;) <img src="src/debian-logo-1024x576.png" width=30><br  /><br  />
 	Debian, also known as Debian GNU/Linux, is a Linux distribution composed of free and open-source software, developed by the community-supported Debian Project, which was established by Ian Murdock on August 16, 1993. It is an operating system for a wide range of devices including laptops, desktops and servers. Users like its stability and reliability since 1993. We provide reasonable default configuration for every package. The Debian developers provide security updates for all packages over their lifetime whenever possible.
 	The image downloaded will be used to install the OS at our Virtual Machine in VBox :)<br  /><br  />
-3. Installing Debian on Virtual Machine<br  /><br  />
+3. **Installing Debian on Virtual Machine**<br  /><br  />
 	In order to install Debian in your Virtual Machine and setup encrypted partitions using LVM, I followed [this](https://www.youtube.com/watch?v=2w-2MX5QrQw) youtube video. The video teaches you to set up partitions as it is required on Bonus part :)<br  /><br  />
 	Settings in VBox while creating a new virtual machine:
 	* OS: Debian 64 bit
@@ -38,7 +38,7 @@ This is my first Virtual Machine in VirtualBox under specific instructions. At t
 	* Manual Disk partition (in order to create the encrypted partitions using LVM - Logical Volume Manager like following image)
 	<img src="src/encrypted_partitions.png" width=500><br  /><br  />
 
-4. SUDO<br  /><br  />
+4. **SUDO**<br  /><br  />
 	Sudo (Super-user do) is a program designed to let system administrators allow some users to execute some commands as root (or another user). The basic philosophy is to give as few privileges as possible but still allow people to get their work done. Sudo is also an effective way to log who ran which command and when.
 	* Installation
 		```bash
@@ -53,7 +53,7 @@ This is my first Virtual Machine in VirtualBox under specific instructions. At t
 
 		In order to achieve these configurations, we should edit sudo configuration file. We can easily access it with `sudo visudo`. Access [sudoers manual](https://www.sudo.ws/man/1.8.14/sudoers.man.html) to understand all possible configurations in sudo.<br  /><br  />
 		<img src="src/sudo_visudo.png" width=600><br  /><br  />
-5. [UFW](https://help.ubuntu.com/community/UFW%0A) firewall<br  /><br  />
+5. **[UFW](https://help.ubuntu.com/community/UFW%0A) firewall**<br  /><br  />
 	UFW is a program for managing a netfilter firewall. Developed to ease iptables firewall configuration, ufw provides a user friendly way to create an IPv4 or IPv6 host-based firewall. By default UFW is disabled.<br  />
 	UFW will be used to configure our OS and leave only port 4242 open. UFM must be active when the virtual machine is launched.
 	* Installation
@@ -73,7 +73,7 @@ This is my first Virtual Machine in VirtualBox under specific instructions. At t
 		sudo ufw allow 4242
 		```
 		<img src="src/ufw.png" width=500><br  /><br  />
-6. Users and groups manipulation<br  /><br  />
+6. **Users and groups manipulation**<br  /><br  />
 	It is required that the additional user is assigned to sudo and user42 groups. Also, in the middle of the defense of the project we will be asked to create a new user and assign it to a group.
 	* Create new user
 	```bash
@@ -99,3 +99,60 @@ This is my first Virtual Machine in VirtualBox under specific instructions. At t
 	```bash
 	groups
     ```
+7. **SSH**<br  /><br  />
+	Secure Shell is a cryptographic network protocol for operating network services securely over an unsecured network. Typical applications include remote command-line, login, and remote command execution, but any network service can be secured with SSH.
+	* Installation
+		```bash
+		sudo apt install open-ssh client
+		sudo apt install open-ssh server
+		```
+	* Configuring SSH service to run only in port 4242<br  />
+		The file which determines the port for ssh service is `sshd_config`. Inside this file you will see a commented line with `Port 22`. Uncomment it and change to `4242` :)<br  />
+		Also, for security reasons, we should block ssh connections as root by editing or adding `PermitRootLogin no`
+		After changing the config file, you will need the restart ssh service.<br  />
+		```bash
+		sudo systemctl restart ssh
+		```
+		<br  />
+		By the end you should be able to connect using ssh through port 4242:<br  />
+		<img src="src/ssh_permission_allowed_port.png" width=400><br  /><br  />
+		But the service will be refused if tried with any other port:<br  />
+		<img src="src/ssh_permission_denied_port.png" width=400><br  /><br  />
+		When trying to login to root, you will see a `Permission Denied` message.<br  /><br  />
+8. **Strong Password Policy**
+	* Password aging<br  />
+		- Your password has to expire every 30 days.
+		- The minimum number of days allowed before the modification of a password will be set to 2.
+		- The user has to receive a warning message 7 days before their password expires.<br  /><br  />
+
+		We can change `/etc/login.defs` to change these configs:<br  />
+		<img src="src/login_defs.png" width=500><br  />
+		obs: Be aware that this will apply only for future created users. To change to current ones you will need to do it one by one:<br  />
+		```bash
+		sudo chage -M 30 -m 2 -W 7 <username>
+		```
+		<br  />
+		To check the status of a user:<br  />
+
+		```bash
+		sudo chage -l <username>
+		```
+
+		<br  />
+	* Complexity<br  />
+		- Your password must be at least 10 characters long. It must contain an uppercase letter and a number. Also, it must not contain more than 3 consecutive identical characters.
+		- The password must not include the name of the user.
+		- The password must have at least 7 characters that are not part of the former password.
+		- Of course, your root password has to comply with this policy.<br  />
+		<br  />
+		We are gonna install **[libpam-pwquality](https://linux.die.net/man/8/pam_pwquality)**. This module can be plugged into the password stack of a given service to provide some plug-in strength-checking for passwords. And that is what we are gonna do to enforce our user's passwords ;)<br  /><br  />
+		Installation<br  />
+			```bash
+			sudo apt install libpam-pwquality
+			```
+		Edit config file `/etc/pam.d/common-password`<br  />
+		<img src="src/password_config.png" width=500><br  /><br  />
+
+9. **montoring.sh**
+
+
