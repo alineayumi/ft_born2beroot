@@ -29,14 +29,15 @@ This is my first Virtual Machine in VirtualBox under specific instructions. At t
 	* Hard disk file type: VDI (VirtualBox Disk Image) 8GB
 	* Storage in physical hard disk: dynamically allocated
 	* Network attached to bridged adapter (to be able to use ssh into de VM)
-	<br  />
-	Configs while installing debian on first startup of VM:
+	<br  /><br  />
+	
+	Configs while installing debian on first startup of VM:<br  />
 	* Language/Country/Keymap/timezone
 	* Hostname: <username>42
 	* Root password
 	* New user (username and password)
-	* Manual Disk partition (in order to create the encrypted partitions using LVM - Logical Volume Manager like following image)
-	<img src="src/encrypted_partitions.png" width=500><br  /><br  />
+	* Manual Disk partition (in order to create the encrypted partitions using LVM - Logical Volume Manager like following image)<br  />
+	<img src="src/encrypted_partitions.png" width=700><br  /><br  />
 
 4. **SUDO**<br  /><br  />
 	Sudo (Super-user do) is a program designed to let system administrators allow some users to execute some commands as root (or another user). The basic philosophy is to give as few privileges as possible but still allow people to get their work done. Sudo is also an effective way to log who ran which command and when.
@@ -52,10 +53,10 @@ This is my first Virtual Machine in VirtualBox under specific instructions. At t
 		- For security reasons too, the paths that can be used by sudo must be restricted.
 
 		In order to achieve these configurations, we should edit sudo configuration file. We can easily access it with `sudo visudo`. Access [sudoers manual](https://www.sudo.ws/man/1.8.14/sudoers.man.html) to understand all possible configurations in sudo.<br  /><br  />
-		<img src="src/sudo_visudo.png" width=600><br  /><br  />
+		<img src="src/sudo_visudo.png" width=700><br  /><br  />
 5. **[UFW](https://help.ubuntu.com/community/UFW%0A) firewall**<br  /><br  />
 	UFW is a program for managing a netfilter firewall. Developed to ease iptables firewall configuration, ufw provides a user friendly way to create an IPv4 or IPv6 host-based firewall. By default UFW is disabled.<br  />
-	UFW will be used to configure our OS and leave only port 4242 open. UFM must be active when the virtual machine is launched.
+	UFW will be used to configure our OS and leave only port 4242 open. UFW must be active when the virtual machine is launched.
 	* Installation
 		```bash
 		sudo apt-get install ufw
@@ -72,7 +73,7 @@ This is my first Virtual Machine in VirtualBox under specific instructions. At t
 		```bash
 		sudo ufw allow 4242
 		```
-		<img src="src/ufw.png" width=500><br  /><br  />
+		<img src="src/ufw.png" width=700><br  /><br  />
 6. **Users and groups manipulation**<br  /><br  />
 	It is required that the additional user is assigned to sudo and user42 groups. Also, in the middle of the defense of the project we will be asked to create a new user and assign it to a group.
 	* Create new user
@@ -115,10 +116,11 @@ This is my first Virtual Machine in VirtualBox under specific instructions. At t
 		```
 		<br  />
 		By the end you should be able to connect using ssh through port 4242:<br  />
-		<img src="src/ssh_permission_allowed_port.png" width=400><br  /><br  />
+		<img src="src/ssh_permission_allowed_port.png" width=700><br  /><br  />
 		But the service will be refused if tried with any other port:<br  />
-		<img src="src/ssh_permission_denied_port.png" width=400><br  /><br  />
-		When trying to login to root, you will see a `Permission Denied` message.<br  /><br  />
+		<img src="src/ssh_permission_denied_port.png" width=700><br  /><br  />
+		When trying to login to root, you will see a `Permission Denied` message.<br  />
+		<img src="src/ssh_permission_denied_root.png" width=700><br  /><br  />
 8. **Strong Password Policy**
 	* Password aging<br  />
 		- Your password has to expire every 30 days.
@@ -126,7 +128,7 @@ This is my first Virtual Machine in VirtualBox under specific instructions. At t
 		- The user has to receive a warning message 7 days before their password expires.<br  /><br  />
 
 		We can change `/etc/login.defs` to change these configs:<br  />
-		<img src="src/login_defs.png" width=500><br  />
+		<img src="src/login_defs.png" width=700><br  />
 		obs: Be aware that this will apply only for future created users. To change to current ones you will need to do it one by one:<br  />
 		```bash
 		sudo chage -M 30 -m 2 -W 7 <username>
@@ -151,7 +153,7 @@ This is my first Virtual Machine in VirtualBox under specific instructions. At t
 			sudo apt install libpam-pwquality
 			```
 		Edit config file `/etc/pam.d/common-password`<br  />
-		<img src="src/password_config.png" width=500><br  /><br  />
+		<img src="src/password_config.png" width=700><br  /><br  />
 
 9. **montoring.sh**
 
