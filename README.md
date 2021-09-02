@@ -147,7 +147,7 @@ This is my first Virtual Machine in VirtualBox under specific instructions. At t
 		- The password must have at least 7 characters that are not part of the former password.
 		- Of course, your root password has to comply with this policy.<br  />
 		<br  />
-		We are gonna install **(libpam-pwquality)[https://linux.die.net/man/8/pam_pwquality]**. This module can be plugged into the password stack of a given service to provide some plug-in strength-checking for passwords. And that is what we are gonna do to enforce our user's passwords ;)<br  /><br  />
+		We are gonna install [libpam-pwquality](https://linux.die.net/man/8/pam_pwquality). This module can be plugged into the password stack of a given service to provide some plug-in strength-checking for passwords. And that is what we are gonna do to enforce our user's passwords ;)<br  /><br  />
 		Installation<br  />
 		
 		```bash
