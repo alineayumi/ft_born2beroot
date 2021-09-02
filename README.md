@@ -148,14 +148,14 @@ This is my first Virtual Machine in VirtualBox under specific instructions. At t
 		- Of course, your root password has to comply with this policy.<br  />
 		<br  />
 	We are gonna install [libpam-pwquality](https://linux.die.net/man/8/pam_pwquality). This module can be plugged into the password stack of a given service to provide some plug-in strength-checking for passwords. And that is what we are gonna do to enforce our user's passwords ;)<br  /><br  />
-		Installation<br  />
+	Installation<br  />
 		
-		```bash
-		sudo apt install libpam-pwquality
-		```
+	```bash
+	sudo apt install libpam-pwquality
+	```
 
-		Edit config file `/etc/pam.d/common-password`<br  />
-		<img src="src/password_config.png" width=700><br  /><br  />
+	Edit config file `/etc/pam.d/common-password`<br  />
+	<img src="src/password_config.png" width=700><br  /><br  />
 
 9. **montoring.sh**
 
