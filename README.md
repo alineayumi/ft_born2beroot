@@ -173,9 +173,9 @@ This should be a script developed in bash. It should display the following infor
 	* The number of commands executed with the sudo program.
 
 I have created a file called `monitoring.sh`. This script calculates all required information, saving it to variables.<br  />
-At the end, the [wall](https://www.geeksforgeeks.org/wall-command-in-linux-with-examples/) command is user to write a message to all users.<br  /><br  />
+At the end, the [wall](https://www.geeksforgeeks.org/wall-command-in-linux-with-examples/) command is used to write a message to all users.<br  /><br  />
 
-Now that we have the bash file, we need to set a job to run it every 10 minutes. We will use (cron)[https://www.geeksforgeeks.org/crontab-in-linux-with-examples/] for that.<br  /><br  />
+Now that we have the bash file, we need to set a job to run it every 10 minutes. We will use [cron](https://www.geeksforgeeks.org/crontab-in-linux-with-examples/) for that.<br  /><br  />
 
 But .. what is cron? <br  /><br  />
 	The *cron* is a software utility, offered by a Linux-like operating system that automates the scheduled task at a predetermined time. It is a *daemon process*, which runs as a background process and performs the specified operations at the predefined time when a certain event or condition is triggered without the intervention of a user.<br  /><br  />
