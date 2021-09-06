@@ -157,6 +157,45 @@ This is my first Virtual Machine in VirtualBox under specific instructions. At t
 	Edit config file `/etc/pam.d/common-password`<br  />
 	<img src="src/password_config.png" width=700><br  /><br  />
 
-9. **montoring.sh**
+9. **montoring.sh**<br  /><br  />
+This should be a script developed in bash. It should display the following information at all terminals every 10 minutes.
+	* The architecture of your operating system and its kernel version.
+	* The number of physical processors.
+	* The number of virtual processors.
+	* The available RAM on your server and its utilization rate as a percentage.
+	* The available memory on your server and its utilization rate as a percentage.
+	* The utilization rate of your processors as a percentage.
+	* The date and time of the last reboot.
+	* Whether LVM is active or not.
+	* The number of active connections.
+	* The number of users using the server.
+	* The IPv4 address of your server and its MAC (Media Access Control) address.
+	* The number of commands executed with the sudo program.
 
+I have created a file called `monitoring.sh`. This script calculates all required information, saving it to variables.<br  />
+At the end, the [wall](https://www.geeksforgeeks.org/wall-command-in-linux-with-examples/) command is user to write a message to all users.<br  /><br  />
 
+Now that we have the bash file, we need to set a job to run it every 10 minutes. We will use (cron)[https://www.geeksforgeeks.org/crontab-in-linux-with-examples/] for that.<br  /><br  />
+
+But .. what is cron? <br  /><br  />
+	The *cron* is a software utility, offered by a Linux-like operating system that automates the scheduled task at a predetermined time. It is a *daemon process*, which runs as a background process and performs the specified operations at the predefined time when a certain event or condition is triggered without the intervention of a user.<br  /><br  />
+
+How do we set the cron job? Via crontab :D<br  /><br  />
+	The  [crontab](https://www.geeksforgeeks.org/crontab-in-linux-with-examples/)  (abbreviation for “cron table”) is list of commands to execute the scheduled tasks at specific time. It allows the user to add, remove or modify the scheduled tasks. The crontab command syntax has six fields separated by space where the first five represent the time to run the task and the last one is for the command.
+
+Activate/edit crontab:
+
+```bash
+sudo crontab -e
+```
+There is 2 set jobs: one for running every 10 minutes and other for reboot:<br  />
+<img src="src/crontab_file.png" width=700><br  /><br  />
+
+To stop cron via command line:
+`sudo /etc/init.d/cron stop`<br  /><br  />
+
+To start is again:
+`sudo /etc/init.d/cron start`<br  /><br  />
+
+Now, every time the minute is 10, it will display the following message to all users:<br  />
+<img src="src/monitoring.png" width=700>
