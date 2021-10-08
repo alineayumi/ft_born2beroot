@@ -199,3 +199,25 @@ To start is again:
 
 Now, every time the minute is 10, it will display the following message to all users:<br  />
 <img src="src/monitoring.png" width=700>
+
+## What you should know
+
+### Project Overview
+
+**What is a virtual machine?**
+A virtual machine is a virtual environment that works like a computer within a computer.
+It runs on an isolated partition of its host computer with its own resources of CPU power, memory, OS and other resources.
+This allows end-users to run applications on VMs and use them as they normally would on their own workstation.
+
+**How a virtual machine works**
+VMs are made possible through virtualization technology. Virtualization uses software to simulate virtual hardware that allows multiple VMs to run on a single machine. The physical machine is known as the host while the VMs running are calling guests.
+This process is managed by a software known as hypervisor. The hypervisor is responsible for managing and provisioning resources - like memory and storage - from the host to guests. It also schedules operations in VMs so they don't overrun each other when using resources. VMs only work if there is a hypervisor to virtualize and distribute host resources.
+Virtualbox is a type of hypervisor.
+
+**Choice of OS - why Debian?**
+**Basic differences between CentOS and Debian**
+**Purpose of virtual machines**
+**What is aptitude and apt**
+**What is APPArmor**
+
+
